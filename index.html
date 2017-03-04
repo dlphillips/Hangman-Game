@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hangman Baby!</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	
+	<script src="assets/javascript/game.js"></script>	
+
+	<link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Gochi+Hand" rel="stylesheet">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="container">
+		<div class="row text-center">
+			<div class="col-md-12">
+				<h1>Low Hang_ng Fru_t!!</h1>
+				<h2>a hangman game</h2>
+				<p>Press any key to get started!</p>
+			</div>
+		</div>
+
+		<div class="row text-center">
+			<div class="col-md-6"><img id="fruitPic" src="http://placehold.it/600x800">
+				<p>
+				</p>
+			</div>
+
+			<div class="col-md-6 text-center">
+				<h3>Wins: </h3>	
+				<h3>Guesses Remaining: </h3>
+				<h2 id=""></h2>
+				<h3>Letters Already Guessed: </h3>
+				<h3 id="typeLtr"></h3>
+				<h3 id="selLtrs"></h3>
+				<h3 id="nmbr"></h3>
+				<p id="fruits">fruits</p>
+				<button onclick="rdmNumber()">number</button>
+				<script>
+					var userkey = document.getElementById("typeLtr")
+						document.onkeyup = function(event) {
+						userkey.textContent = event.key;
+					}
+
+					var fruits, text, fLen, i;
+					text = ""
+					fruits = ["Banana", "Orange", "Apple", "Mango", "Peach", "Apricot", "Kiwi", "Pear", "Pineapple", "Strawberry"];
+					fLen = fruits.length;
+					for (i = 0; i < fLen; i++) {
+					    text += fruits[i] + ", ";
+					};
+					document.getElementById("fruits").innerHTML = text;
+
+				</script>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

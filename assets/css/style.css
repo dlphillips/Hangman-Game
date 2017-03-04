@@ -1,0 +1,23 @@
+@grid-gutter-width:         200	px;
+@grid-float-breakpoint:     768px;
+
+.container {
+	background-color: #eee;
+	font-family: 'Arvo', serif;
+	font-size: 20px;
+	line-height: 1.5;
+}
+
+h1 {
+	/*font-weight: bold;*/
+	font-size: 100px;
+	font-family: 'Gochi Hand', cursive;
+	background: -webkit-linear-gradient(yellow, red);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+h2 {
+	font-size: 75px;
+	font-family: 'Gochi Hand', cursive;
+}
