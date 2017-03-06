@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Hangman Baby!</title>
+	<title>Low Hang_ng Fru_t!!</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -24,7 +24,7 @@
 			<div class="col-md-12">
 				<h1>Low Hang_ng Fru_t!!</h1>
 				<h2>a hangman game</h2>
-				<p>Press any key to get started!</p>
+<!-- 				<p>Press any key to get started!</p> -->
 			</div>
 		</div>
 
@@ -36,28 +36,71 @@
 
 			<div class="col-md-6 text-center">
 				<h3>Wins: </h3>	
+				<h3>Losses: </h3>	
 				<h3>Guesses Remaining: </h3>
-				<h2 id=""></h2>
-				<h3>Letters Already Guessed: </h3>
+				<h2 id="guesses"></h2>
+				<h3>Key Pressed: </h3>
 				<h3 id="typeLtr"></h3>
-				<h3 id="selLtrs"></h3>
+				<h3>Letters Already Guessed: </h3>				
+				<h3 id="allLtrs"></h3>
+				<h3>Random Number: </h3>
 				<h3 id="nmbr"></h3>
-				<p id="fruits">fruits</p>
-				<button onclick="rdmNumber()">number</button>
+				<h3>Random Fruit: </h3>
+				<p id="fruits"></p>
+				<button onclick="gameReset()">Start Game</button>
+				
 				<script>
-					var userkey = document.getElementById("typeLtr")
-						document.onkeyup = function(event) {
-						userkey.textContent = event.key;
-					}
 
-					var fruits, text, fLen, i;
-					text = ""
+					var fruits, text, selFruit, fLen, i, numLetters, numGuesses, selLtrs;
+					numGuesses = 6;
+					text = "";
+					selLtrs = [""]
 					fruits = ["Banana", "Orange", "Apple", "Mango", "Peach", "Apricot", "Kiwi", "Pear", "Pineapple", "Strawberry"];
 					fLen = fruits.length;
 					for (i = 0; i < fLen; i++) {
 					    text += fruits[i] + ", ";
 					};
-					document.getElementById("fruits").innerHTML = text;
+					// document.getElementById("fruits").innerHTML = text;
+
+					function gameReset() {
+						// select random number, 0-9
+					    var x = Math.floor((Math.random() * 10));
+					    // select matching fruit from array based on number
+    					selFruit = fruits[x];
+    					// count number of letters in fruit name
+    					numLetters = selFruit.length;
+    					numGuesses = 6;
+						document.getElementById("fruits").innerHTML = selFruit;
+						document.getElementById("nmbr").innerHTML = x;
+						document.getElementById("guesses").innerHTML = numGuesses;
+					}
+
+
+					var userkey = document.getElementById("typeLtr")
+						document.onkeyup = function(event) {
+						userkey.textContent = event.key;
+
+						// check to see if letter is already been selected, only subtract from guesses if it has not
+						// 
+						// document.getElementById("selLtrs").innerHTML = selLtrs =+ ", "+ userkey;
+						numGuesses--
+						document.getElementById("guesses").innerHTML = numGuesses;
+						console.log(numGuesses);
+						console.log(numGuesses != 0);
+						console.log(numGuesses === 0);
+
+						// if (numGuesses === 0);
+						// {
+						// 	alert("sorry, you lost");
+						// 	gameReset();
+						// }
+
+
+						if (numGuesses === 0) {
+							alert("sorry, you lost");
+							gameReset();
+						};
+					}
 
 				</script>
 			</div>
