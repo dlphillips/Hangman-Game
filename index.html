@@ -39,8 +39,6 @@
 				<h3>Losses: </h3>	
 				<h3>Guesses Remaining: </h3>
 				<h2 id="guesses"></h2>
-				<h3>Key Pressed: </h3>
-				<h3 id="typeLtr"></h3>
 				<h3>Letters Already Guessed: </h3>				
 				<h3 id="allLtrs"></h3>
 				<h3>Random Number: </h3>
@@ -51,10 +49,10 @@
 				
 				<script>
 
-					var fruits, text, selFruit, fLen, i, numLetters, numGuesses, selLtrs;
+					var fruits, text, selFruit, fLen, i, numLetters, numGuesses, selLtrs, skey, lLen, lText;
 					numGuesses = 6;
 					text = "";
-					selLtrs = [""]
+					selLtrs = [];
 					fruits = ["Banana", "Orange", "Apple", "Mango", "Peach", "Apricot", "Kiwi", "Pear", "Pineapple", "Strawberry"];
 					fLen = fruits.length;
 					for (i = 0; i < fLen; i++) {
@@ -70,34 +68,33 @@
     					// count number of letters in fruit name
     					numLetters = selFruit.length;
     					numGuesses = 6;
+    					selLtrs = [];
+    					lText = "";
 						document.getElementById("fruits").innerHTML = selFruit;
 						document.getElementById("nmbr").innerHTML = x;
 						document.getElementById("guesses").innerHTML = numGuesses;
+						document.getElementById("allLtrs").innerHTML = lText;
 					}
 
 
-					var userkey = document.getElementById("typeLtr")
-						document.onkeyup = function(event) {
-						userkey.textContent = event.key;
+					document.onkeyup = function(event) {
+         				var userkey = event.key;
 
-						// check to see if letter is already been selected, only subtract from guesses if it has not
-						// 
-						// document.getElementById("selLtrs").innerHTML = selLtrs =+ ", "+ userkey;
-						numGuesses--
+					// check to see if letter is already been selected, only subtract from guesses if it has not
+
+					var skey = selLtrs.indexOf(userkey, 0);
+						console.log(skey);
+						if (skey < 0) {
+							selLtrs.push(userkey);
+							numGuesses-- ;
+							lText += userkey + " ";
+							};	
+							document.getElementById("allLtrs").innerHTML = lText;
+
 						document.getElementById("guesses").innerHTML = numGuesses;
-						console.log(numGuesses);
-						console.log(numGuesses != 0);
-						console.log(numGuesses === 0);
-
-						// if (numGuesses === 0);
-						// {
-						// 	alert("sorry, you lost");
-						// 	gameReset();
-						// }
-
 
 						if (numGuesses === 0) {
-							alert("sorry, you lost");
+							alert("Sorry, you lost. Try again!");
 							gameReset();
 						};
 					}
