@@ -29,36 +29,38 @@
 		</div>
 
 		<div class="row text-center">
-			<div class="col-md-6"><img id="fruitPic" src="http://placehold.it/600x800">
+			<div class="col-md-6"><img id="fruitPic" src="http://placehold.it/500x300">
 				<p>
 				</p>
 			</div>
 
 			<div class="col-md-6 text-center">
-				<h3>Wins: </h3>	
-				<h3>Losses: </h3>	
+				<h3 id="iWins">Wins: 0</h3>	
+				<h3 id="iLosses">Losses: 0</h3>	
 				<h3>Guesses Remaining: </h3>
 				<h2 id="guesses"></h2>
 				<h3>Letters Already Guessed: </h3>				
 				<h3 id="allLtrs"></h3>
-				<h3>Random Number: </h3>
-				<h3 id="nmbr"></h3>
-				<h3>Random Fruit: </h3>
-				<p id="fruits"></p>
+				<h3>Secret Fruit: </h3>
+				<h2 id="fruit"></h2>
 				<button onclick="gameReset()">Start Game</button>
 				
 				<script>
 
-					var fruits, text, selFruit, fLen, i, numLetters, numGuesses, selLtrs, skey, lLen, lText;
+					var fruit, text, selFruit, fLen, i, numLetters, numGuesses, selLtrs, skey, lLen, lText, wins, losses, blanks, remSpaces;
 					numGuesses = 6;
+					wins = 0;
+					losses = 0;
 					text = "";
+					blanks ="";
 					selLtrs = [];
-					fruits = ["Banana", "Orange", "Apple", "Mango", "Peach", "Apricot", "Kiwi", "Pear", "Pineapple", "Strawberry"];
+					goodLtrs = [];
+					wordLetters = [];
+					fruits = ["banana", "orange", "apple", "mango", "peach", "apricot", "kiwi", "pear", "pineapple", "strawberry"];
 					fLen = fruits.length;
 					for (i = 0; i < fLen; i++) {
 					    text += fruits[i] + ", ";
 					};
-					// document.getElementById("fruits").innerHTML = text;
 
 					function gameReset() {
 						// select random number, 0-9
@@ -67,37 +69,92 @@
     					selFruit = fruits[x];
     					// count number of letters in fruit name
     					numLetters = selFruit.length;
+    					remSpaces = numLetters;
+    					// assign defaults to variables
     					numGuesses = 6;
     					selLtrs = [];
+    					goodLtrs = [];
     					lText = "";
-						document.getElementById("fruits").innerHTML = selFruit;
-						document.getElementById("nmbr").innerHTML = x;
+    					blanks = "";
+    					wordLetters = selFruit.split("");
+
+						console.log(selFruit);
+						console.log(wordLetters);
+
+						for (i = 0; i < numLetters; i++) {
+						    blanks += "_ ";
+						};
+
 						document.getElementById("guesses").innerHTML = numGuesses;
 						document.getElementById("allLtrs").innerHTML = lText;
+						// document.getElementById("fruit").innerHTML = selFruit;
+						document.getElementById("fruit").innerHTML = blanks;
 					}
 
-
+					//********************************************//
 					document.onkeyup = function(event) {
          				var userkey = event.key;
 
-					// check to see if letter is already been selected, only subtract from guesses if it has not
+         			var userkey = userkey.toLowerCase();
 
-					var skey = selLtrs.indexOf(userkey, 0);
-						console.log(skey);
-						if (skey < 0) {
-							selLtrs.push(userkey);
-							numGuesses-- ;
-							lText += userkey + " ";
-							};	
-							document.getElementById("allLtrs").innerHTML = lText;
+         			var skey = selFruit.indexOf(userkey, 0);
+						if (skey > -1) {
+							goodLtrs.push(userkey);
 
-						document.getElementById("guesses").innerHTML = numGuesses;
+							// blanks = "";
+							// for (i = 0; i < numLetters; i++) {
 
-						if (numGuesses === 0) {
-							alert("Sorry, you lost. Try again!");
-							gameReset();
+							// 	for (var i = goodLtrs.length - 1; i >= 0; i--) {
+							// 		goodLtrs[i]
+							// 	}
+							// 		    if (userkey = wordLetters[i]) {
+							// 		    	console.log(wordLetters.[i]);
+							// 		    	blanks += userkey + " ";
+
+							//     } else {
+						 //    		blanks += "_ ";
+							//     }
+
+							//   document.getElementById("fruit").innerHTML = blanks;
+							// }
+
+
+						// for (var j = goodLtrs.length - 1; j >= 0; j--) {
+						// 	colsole.log(goodLtrs.[j]);
+						// }
+
+						//what happens if they match a letter
+
+						// build word with missing blanks
+						// for (i = 0; i < numLetters; i++) {
+						// 	    blanks += "_ ";
+						// };
+
+						//
+
+						} else {
+						// letter not found in word	
+						// check to see if letter is already been typed, only subtract from guesses if it has not
+							var skey = selLtrs.indexOf(userkey, 0);
+								if (skey < 0) {
+									selLtrs.push(userkey);
+									numGuesses-- ;
+									lText += userkey + " ";
+									};	
+									document.getElementById("allLtrs").innerHTML = lText;
+
+								document.getElementById("guesses").innerHTML = numGuesses;
+
+								if (numGuesses === 0) {
+									alert("Sorry, you lost. Try again!");
+									gameReset();
+									losses++;
+									document.getElementById("iLosses").innerHTML = "Losses: " + losses;
+								};
 						};
+
 					}
+					//********************************************//
 
 				</script>
 			</div>

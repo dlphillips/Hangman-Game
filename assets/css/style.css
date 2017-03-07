@@ -10,11 +10,11 @@
 
 h1 {
 	/*font-weight: bold;*/
-	font-size: 100px;
-	font-family: 'Gochi Hand', cursive;
+	font-size: 60px;
+/*	font-family: 'Gochi Hand', cursive;
 	background: -webkit-linear-gradient(yellow, red);
 	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	-webkit-text-fill-color: transparent;*/
 }
 
 h2 {
