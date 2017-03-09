@@ -30,8 +30,7 @@
 
 		<div class="row text-center">
 			<div class="col-md-6"><img id="fruitPic" src="">
-				<p>
-				</p>
+				<h2 id="winmsg"></h2>
 			</div>
 
 			<div class="col-md-6 text-center">
@@ -43,7 +42,7 @@
 				<h3 id="allLtrs"></h3>
 				<h3>Secret Word: </h3>
 				<h2 id="fruit"></h2>
-				<button onclick="gameReset()">Select Word</button>
+				<button id = "srtBtn" onclick="gameReset()">Begin/New Word</button>
 				
 				<script>
 
@@ -121,12 +120,17 @@
 							document.getElementById("fruit").innerHTML = text;
 
 							if (answer.indexOf("_") === -1) {
+								var snd = new Audio("https://upload.wikimedia.org/wikipedia/en/9/9e/Yello_-_Oh_Yeah_excerpt.ogg");
+								snd.play();
 								wins++;
 								document.getElementById("iWins").innerHTML = "Wins: " + wins;
 								document.getElementById("fruitPic").src = imgSrc;
-								alert("You won!!! Let's play again!");
+								document.getElementById("winmsg").innerHTML = "You won!!! Let's play again!";
+
+								// alert("You won!!! Let's play again!");
 								gameReset();
 							}
+
 
 						} else {
 						// letter not found in word	
