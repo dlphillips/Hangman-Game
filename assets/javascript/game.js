@@ -16,8 +16,6 @@
 // 	return this.Math.floor(Math.random() * 10);
 // }
 
-
-
 // Harry Belafonte - Banana Boat Song (Day-O)
 // R.E.M. - Orange Crush
 // Fiona Apple
@@ -29,7 +27,23 @@
 // }
 
 
+var numGuesses = 6;
+var wins = 0;
+var losses = 0;
+var text = "";
+var answer = [];
+var selLtrs = [];
+var goodLtrs = [];
+var wordLetters = [];
+var imgSrc = "";
+var fruits = ["banana", "orange", "apple", "mango", "peach", "apricot", "kiwi", "pear", "pineapple", "strawberry"];
+var fLen = fruits.length;
+for (i = 0; i < fLen; i++) {
+    text += fruits[i] + ", ";
+}
+
 function gameReset() {
+
 	// select random number, 0-9
     var x = Math.floor((Math.random() * 10));
     // select matching fruit from array based on number
@@ -66,9 +80,8 @@ function gameReset() {
 
 
 document.onkeyup = function(event) {
-	var userkey = event.key;
 
-	var userkey = userkey.toLowerCase();
+	var userkey = event.key.toLowerCase();
 
 	var skey = selFruit.indexOf(userkey, 0);
 	if (skey > -1) {
@@ -77,13 +90,13 @@ document.onkeyup = function(event) {
 		for (i = 0; i < numLetters; i++) {
 		   if (userkey === wordLetters[i]) {
 		   answer.splice(i,1,userkey);
-		};
-		};	
+		}
+		}	
 
-		text = ""
+		text = "";
 		for (i = 0; i < answer.length; i++) {
 		    text += answer[i] + " ";
-		};
+		}
 		document.getElementById("fruit").innerHTML = text;
 
 		if (answer.indexOf("_") === -1) {
@@ -94,7 +107,6 @@ document.onkeyup = function(event) {
 			document.getElementById("fruitPic").src = imgSrc;
 			document.getElementById("winmsg").innerHTML = "You won!!! Let's play again!";
 
-			// alert("You won!!! Let's play again!");
 			gameReset();
 		}
 
@@ -102,23 +114,22 @@ document.onkeyup = function(event) {
 	} else {
 	// letter not found in word	
 	// check to see if letter is already been typed, only subtract from guesses if it has not been typed
-		var skey = selLtrs.indexOf(userkey, 0);
-			if (skey < 0) {
-				selLtrs.push(userkey);
-				numGuesses-- ;
-				lText += userkey + " ";
-				};	
-				document.getElementById("allLtrs").innerHTML = lText;
+		if (skey < 0) {
+			selLtrs.push(userkey);
+			numGuesses-- ;
+			lText += userkey + " ";
+			}	
+			document.getElementById("allLtrs").innerHTML = lText;
 
-			document.getElementById("guesses").innerHTML = numGuesses;
+		document.getElementById("guesses").innerHTML = numGuesses;
 
-			if (numGuesses === 0) {
-				losses++;
-				document.getElementById("iLosses").innerHTML = "Losses: " + losses;
-				alert("Sorry, you lost. The answer was "+selFruit+". Try again!");
-				gameReset();
-			};
-	};
+		if (numGuesses === 0) {
+			losses++;
+			document.getElementById("iLosses").innerHTML = "Losses: " + losses;
+			alert("Sorry, you lost. The answer was "+selFruit+". Try again!");
+			gameReset();
+		}
+	}
 
-}
+};
 
